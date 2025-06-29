@@ -15,6 +15,9 @@ generateGridBtn.addEventListener("click", () => createGrid(parseInt(inputRows.va
 
 function colorDiv(el) {
     el.style.backgroundColor = "black";
+    if(el.style.opacity <= 0.9) {
+        el.style.opacity = +el.style.opacity + 0.2;
+    }
 }
 
 function getBoxWidth(columns) {
@@ -26,16 +29,20 @@ function getBoxHeight(rows) {
 }
 
 function createGrid(columns, rows) {
-    container.replaceChildren();
-    row.replaceChildren();
-    box.style.width = `${getBoxWidth(columns)}px`;
-    box.style.height = `${getBoxHeight(rows)}px`;
+    if(columns && rows <= 100) {
+        container.replaceChildren();
+        row.replaceChildren();
+        box.style.width = `${getBoxWidth(columns)}px`;
+        box.style.height = `${getBoxHeight(rows)}px`;
 
-    for(let j = 0;j < columns;j++){
-    row.appendChild(box.cloneNode(true));
-    }
-    for(let i = 0; i < rows;i++){
-    container.appendChild(row.cloneNode(true));
+        for(let j = 0;j < columns;j++){
+        row.appendChild(box.cloneNode(true));
+        }
+        for(let i = 0; i < rows;i++){
+        container.appendChild(row.cloneNode(true));
+        }
+    } else {
+        alert("Cannot create grid bigger than 100x100");
     }
 }
 
